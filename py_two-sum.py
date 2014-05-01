@@ -1,4 +1,4 @@
-//Accepted 208ms
+#Accepted 208ms
 class Solution:
     # @return a tuple, (index1, index2)
     def twoSum(self, num, target):
@@ -22,9 +22,9 @@ class Solution:
             else:
                 j -= 1
                 
-//Attention: Next is the TLE code:
-//I ever used a list and a dictionary, but both of it failed, overtime! So python's dict can't compare with C++'s map?
-//TLE:
+#Attention: Next is the TLE code:
+#I ever used a list and a dictionary, but both of it failed, overtime! So python's dict can't compare with C++'s map?
+#TLE:
 class Solution:
     # @return a tuple, (index1, index2)
     def twoSum(self, num, target):
