@@ -13,7 +13,7 @@ class Solution:
         p2 = h2 = head.next
         while p1 and p2:
             p1.next = p2.next
-            p1 = p1.next
+            p1 = p1.next #Attention: if I change the last two sentences to p1 = p1.next = p2.next, it has runtime error. This is different from c++.
             if not p1: break
             p2.next = p1.next
             p2 = p2.next
@@ -29,5 +29,5 @@ class Solution:
             p2 = nxt2
         return h2
 
-        
-        
+
+
