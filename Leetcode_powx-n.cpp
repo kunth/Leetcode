@@ -37,3 +37,29 @@ public:
         return ans;
     }
 };
+
+//Sorry, the last code is too horrible to see it again.
+//Here is the better code:
+
+class Solution {
+public:
+    double pow(double x, int n) {
+        double ans = 1;
+        bool flag = true;
+        if (n < 0) {
+            flag = false;
+            n = -n;
+        }
+        while (n) {
+            if (n % 2 != 0) {
+                ans *= x;
+            }
+            x *= x;
+            n /= 2;
+        }
+        if (flag) {
+            return ans;
+        }
+        return 1.0 / ans;
+    }
+};
