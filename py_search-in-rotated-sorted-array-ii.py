@@ -1,9 +1,5 @@
 class Solution:
     def bin_search(self, arr, target):
-        if not arr:
-            return False
-        if len(arr) == 1:
-            return arr[0] == target
         left = 0
         right = len(arr)-1
         while left <= right:
