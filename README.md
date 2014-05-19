@@ -3,7 +3,7 @@ Leetcode source code
 
 Here are fibonacci's Leetcode source codes
 
-在学习python, 将逐步添加python的源码
+将逐步添加python的源码
 
 __`c++`__  源码以Leetcode_开始
 
