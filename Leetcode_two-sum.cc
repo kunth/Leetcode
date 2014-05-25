@@ -30,3 +30,27 @@ public:
         }
     }
 };
+
+
+//second trial
+class Solution {
+public:
+    vector<int> twoSum(vector<int> &numbers, int target) {
+        vector<int> ans;
+        if(numbers.empty())
+            return ans;
+        unordered_map<int, int>mp;
+        for(int i = 0; i<numbers.size(); ++i)
+        {
+            auto it = mp.find(target-numbers[i]);
+            if(it!=mp.end())
+            {
+                ans.push_back(it->second+1);
+                ans.push_back(i+1);
+                return ans;
+            }
+            else
+                mp[numbers[i]] = i;
+        }
+    }
+};
