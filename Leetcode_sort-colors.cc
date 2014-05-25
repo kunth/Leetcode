@@ -29,3 +29,22 @@ public:
         }
     }
 };
+
+//second trial
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        int i = 0, j = n-1, k=0;
+        while(k>=i && k<=j)
+        {
+            if(A[k]==0)
+                swap(A[i++], A[k]);
+            else if(A[k]==2)
+                swap(A[j--], A[k]);
+            else
+                ++k;
+            if(i>k)
+                k = i;
+        }
+    }
+};
