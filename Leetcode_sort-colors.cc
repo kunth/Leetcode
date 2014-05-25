@@ -35,7 +35,7 @@ class Solution {
 public:
     void sortColors(int A[], int n) {
         int i = 0, j = n-1, k=0;
-        while(k>=i && k<=j)
+        while(k<=j)
         {
             if(A[k]==0)
                 swap(A[i++], A[k]);
