@@ -30,3 +30,34 @@ public:
         return maxlen;
     }
 };
+
+
+//second trial
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        if(s.empty())
+            return 0;
+        unordered_map<char, int>mp;
+        unordered_map<char, int>::iterator it;
+        int i = 0, mlen = 0;
+        for(int k = 0; k<s.length(); ++k)
+        {
+            it = mp.find(s[k]);
+            if(it == mp.end())
+                mp[s[k]]=k;
+            else
+            {
+                while(s[i]!=s[k])
+                {
+                    it = mp.find(s[i]);
+                    mp.erase(it);
+                    ++i;
+                }
+                ++i;
+            }
+            mlen = max(mlen, k-i+1);
+        }
+        return mlen;
+    }
+};
