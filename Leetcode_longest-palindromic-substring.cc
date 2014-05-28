@@ -31,3 +31,34 @@ public:
         return substr;
     }
 };
+
+
+//SECOND TRIAL
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if(s.empty())
+            return s;
+        int maxlen = 0, len = 0, start = 0, j = 1;
+        for(int i = 0; i<s.length(); ++i)
+        {
+            len = -1;
+            for(j = 0; i-j>=0 && i+j<s.length() && s[i-j]==s[i+j]; ++j)
+                len +=2;
+            if(len > maxlen)
+            {
+                maxlen = len;
+                start = i-j+1; 
+            }
+            len = 0;
+            for(j = 0; i-j>=0 && i+j+1<s.length() && s[i-j]==s[i+j+1]; ++j)
+                len +=2;
+            if(len > maxlen)
+            {
+                maxlen = len;
+                start = i-j+1; 
+            }
+        }
+        return s.substr(start, maxlen);
+    }
+};
