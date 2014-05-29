@@ -21,3 +21,24 @@ public:
         return -x;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int reverse(int x) {
+        long long int y = x;
+        bool f = x >=0 ? true : false;
+        if(!f)
+            y=-y;
+        stringstream ss;
+        string str;
+        ss << y;
+        ss >> str;
+        string rs(str.rbegin(), str.rend());
+        ss.clear();
+        ss.str("");
+        ss << rs;
+        ss >> y;
+        return f ? y : -y;
+    }
+};
