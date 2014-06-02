@@ -40,3 +40,36 @@ public:
         return ans;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int threeSumClosest(vector<int> &num, int target) {
+        int diff = INT_MAX, ans = 0;
+        sort(num.begin(), num.end());
+        for(int i = 0; i<num.size()-2; ++i)
+        {
+            if(i && num[i]==num[i-1])
+                continue;
+            for(int j = num.size()-1; j>i+1; --j)
+            {
+                if(j < num.size()-1 && num[j]==num[j+1])
+                    continue;
+                for(int k = i + 1; k < j; ++k)
+                {
+                    if(k>i+1 && num[k]==num[k-1])
+                        continue;
+                    if(abs(num[i]+num[j]+num[k]-target)<diff)
+                    {
+                        diff = abs(num[i]+num[j]+num[k]-target);
+                        ans = num[i]+num[j]+num[k];
+                        if(!diff)
+                            return target;
+                    }
+                }
+            }
+        }
+        return ans;
+    }
+};
+
