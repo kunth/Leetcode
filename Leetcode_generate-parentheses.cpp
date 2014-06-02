@@ -29,3 +29,40 @@ public:
       return vec;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    int n;
+    void dfs(vector<string>&ans, string str, int left, int diff)
+    {
+        if(left == n && !diff)
+        {
+            ans.push_back(str);
+            return;
+        }
+        if(left<n)
+        {
+            str += '(';
+            dfs(ans, str, left+1, diff+1);
+            if(diff>0)
+            {
+                str[str.length()-1]=')';
+                dfs(ans, str, left, diff-1);
+            }
+        }
+        else
+        {
+            str += ')';
+            dfs(ans, str, left, diff-1);
+        }
+    }
+public:
+    vector<string> generateParenthesis(int n) {
+        this->n = n;
+        vector<string>ans;
+        string str;
+        dfs(ans, "", 0, 0);
+        return ans;
+    }
+};
