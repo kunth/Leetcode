@@ -37,3 +37,42 @@ public:
           return ans;
      }
 };
+
+//SECOND TRIAL
+//
+class Solution {
+public:
+    vector<vector<int> > threeSum(vector<int> &num) {
+        vector<vector<int>>ans;
+        sort(num.begin(), num.end());
+        if(num.size()<3 || num.front()>0 || num.back()<0)
+            return ans;
+        for(int i = 0; i<num.size()-2; ++i)
+        {
+            if(i && num[i]==num[i-1])
+                continue;
+            for(int j = num.size()-1; j>i+1; --j)
+            {
+                if(j < num.size()-1 && num[j]==num[j+1])
+                    continue;
+                for(int k = i + 1; k < j; ++k)
+                {
+                    if(k>i+1 && num[k]==num[k-1])
+                        continue;
+                    if(num[i]+num[k]+num[j]==0)
+                    {
+                        vector<int>tmp;
+                        tmp.push_back(num[i]);
+                        tmp.push_back(num[k]);
+                        tmp.push_back(num[j]);
+                        ans.push_back(tmp);
+                        break;
+                    }
+                    else if(num[i]+num[k]+num[j]>0)
+                        break;
+                }
+            }
+        }
+        return ans;
+    }
+};
