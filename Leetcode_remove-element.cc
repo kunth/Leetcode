@@ -1,3 +1,22 @@
+//SECOND TRIAL, 12ms
+class Solution {
+public:
+    int removeElement(int A[], int n, int elem) {
+        if(!A)
+            return 0;
+        int i = 0;
+        while(i < n)
+        {
+            if(A[i]==elem)
+                swap(A[i], A[--n]);
+            else
+                ++i;
+        }
+        return n;
+    }
+};
+
+//FIRST TRIAL
 class Solution {
 public:
     int removeElement(int A[], int n, int elem) {
