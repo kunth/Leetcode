@@ -27,3 +27,21 @@ public:
         return NULL;
     }
 };
+
+//SECOND TRIAL
+//unordered_map is better, and 'bool' can also take place of 'int'
+
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        unordered_map<ListNode*, bool>mp;
+        while(head)
+        {
+            if(mp[head]==true)
+                return head;
+            mp[head] = true;
+            head = head->next;
+        }
+        return NULL;
+    }
+};
