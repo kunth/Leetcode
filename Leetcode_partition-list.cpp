@@ -51,3 +51,50 @@ public:
         return new_head;
     }
 };
+
+
+//SECOND SOLUTION
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        if(!head)
+            return NULL;
+        ListNode *newHead = NULL, *newTail=NULL, *biggerHead = NULL, *q = NULL, *p = head;
+        while(p)
+        {
+            if(p->val<x)
+            {
+                if(!newHead)
+                    newTail = newHead = p;
+                else
+                {
+                    newTail->next = p;
+                    newTail = p;
+                }
+                p = p->next;
+            }
+            else
+            {
+                if(!biggerHead)
+                    q = biggerHead = p;
+                else
+                {
+                    q->next = p;
+                    q = q->next;
+                }
+                p = p->next;
+                while(p && p->val>=x)
+                {
+                    q->next = p;
+                    q = p;
+                    p = p->next;
+                }
+            }
+        }
+        if(!newHead || !biggerHead)
+            return head;
+        newTail->next = biggerHead;
+        q->next = NULL;
+        return newHead;
+    }
+};
