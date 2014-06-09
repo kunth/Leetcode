@@ -53,3 +53,22 @@ public:
         return preorder(root);
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    int getHeight(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        return 1 + max(getHeight(root->left), getHeight(root->right));
+    }
+public:
+    bool isBalanced(TreeNode *root) {
+        if(!root)
+            return true;
+        int lh = getHeight(root->left);
+        int rh = getHeight(root->right);
+        return abs(lh-rh)<=1 && isBalanced(root->left) && isBalanced(root->right);
+    }
+};
