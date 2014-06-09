@@ -31,3 +31,22 @@ public:
         return head;
     }
 };
+
+//SECOND TRIAL, 60ms
+class Solution {
+private:
+    TreeNode* construct_tree(TreeNode* root, vector<int>& num, int begin, int end)
+    {
+        if(begin > end)
+            return NULL;
+        int mid = (begin+end)/2;
+        root = new TreeNode(num[mid]);
+        root->left = construct_tree(root->left, num, begin, mid-1);
+        root->right = construct_tree(root->right, num, mid+1, end);
+        return root;
+    }
+public:
+    TreeNode *sortedArrayToBST(vector<int> &num) {
+        return construct_tree(NULL, num, 0, num.size()-1);
+    }
+};
