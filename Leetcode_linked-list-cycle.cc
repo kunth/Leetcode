@@ -1,5 +1,3 @@
-//http://oj.leetcode.com/submissions/detail/4824723/
-
 /**
  * Definition for singly-linked list.
  * struct ListNode {
@@ -28,5 +26,22 @@ public:
             return false;
         }
         return true;
+    }
+};
+
+//SECOND TRIAL
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(!head)
+            return false;
+        ListNode*p = head, *q = head;
+        do{
+            p = p->next;
+            if(p)
+                p = p->next;
+            q = q->next;
+        }while(p && p!=q);
+        return p;
     }
 };
