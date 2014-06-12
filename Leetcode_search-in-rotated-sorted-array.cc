@@ -35,3 +35,49 @@ public:
         return -1;
     }
 };
+
+//SECOND TRIAL, O(logn) time
+class Solution {
+private:
+    int findInRotatedArray(int A[], int left, int right, int target)
+    {
+        if(!A || left > right)
+            return -1;
+        if(left==right)
+        {
+            if(A[left]==target)
+                return left;
+            else
+                return -1;
+        }
+        int mid = (left+right)/2;
+        if(A[left]<A[mid])
+        {
+            if(A[left]<=target && target<=A[mid])
+                return findInRotatedArray(A, left, mid, target);
+            else
+                return findInRotatedArray(A, mid+1, right, target);
+        }
+        else if(A[left]>A[mid])
+        {
+            if(target>=A[mid] && target<=A[right])
+                return findInRotatedArray(A, mid, right, target);
+            else
+                return findInRotatedArray(A, left, mid-1, target);
+        }
+        else
+        {
+            if(A[mid]==A[right])
+                return A[left]==target ? left : -1;
+
+            int ans = findInRotatedArray(A, left, mid, target);
+            if(ans<0)
+                return findInRotatedArray(A, mid+1, right, target);
+            return ans;
+        }
+    }
+public:
+    int search(int A[], int n, int target) {
+        return findInRotatedArray(A, 0, n-1, target);
+    }
+};
