@@ -44,3 +44,67 @@ public:
         return false;
     }
 };
+
+//SECOND TRIAL
+//剪枝再二分搜索
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int> > &matrix, int target) {
+        if(matrix.empty())
+            return false;
+        int row = matrix.size(), col = matrix[0].size();
+        int r = 0, c = col-1;
+        while(r < row && c>=0)
+        {
+            if(matrix[r][c] > target)
+            {
+                if(matrix[r][0]>target)
+                    return false;
+                else if(matrix[r][0]<target)
+                {
+                    int i = 1, j = c-1;
+                    while(i<=j)
+                    {
+                        int mid = (i+j)/2;
+                        if(matrix[r][mid]>target)
+                            j = mid-1;
+                        else if(matrix[r][mid]<target)
+                            i = mid+1;
+                        else
+                            return true;
+                    }
+                    return false;
+                }
+                else
+                    return true;
+            }
+            else if(matrix[r][c] < target)
+                ++r;
+            else
+                return true;
+        }
+        return false;
+    }
+};
+
+//Thrid trial
+//剪枝再线性搜索, 比上一个要差
+class Solution {
+public:
+    bool searchMatrix(vector<vector<int> > &matrix, int target) {
+        if(matrix.empty())
+            return false;
+        int row = matrix.size(), col = matrix[0].size();
+        int r = 0, c = col-1;
+        while(r < row && c>=0)
+        {
+            if(matrix[r][c] > target)
+                --c;
+            else if(matrix[r][c] < target)
+                ++r;
+            else
+                return true;
+        }
+        return false;
+    }
+};
