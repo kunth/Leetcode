@@ -25,3 +25,24 @@ public:
         return mid+1;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int searchInsert(int A[], int n, int target) {
+        if(!A || !n)
+            return 0;
+        int left = 0, right = n-1, mid;
+        while(left<=right)
+        {
+            mid = (left+right)/2;
+            if(target == A[mid])
+                return mid;
+            else if(target < A[mid])
+                right = mid-1;
+            else
+                left = mid+1;
+        }
+        return left;
+    }
+};
