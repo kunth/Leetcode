@@ -38,7 +38,42 @@ public:
             }
             st.pop();
         }
-        //s.clear();
         s = str;
     }
+};
+
+//SECOND TRIAL
+class Solution {
+public:
+	void reverseWords(string &s) {
+		if(s.empty())
+		    return;
+		int p = 0, q = 0;
+		stack<string>st;
+		string str, news;
+		while(q < s.length())
+		{
+		    while(q<s.length() && s[q]!=' ')
+		        ++q;
+		    str = s.substr(p, q-p);
+		    if(!str.empty())
+		        st.push(str);
+		    p = ++q;
+		}
+		if(st.size()>1)
+		{
+		    while(!st.empty())
+		    {
+		        if(!news.empty())
+		            news+=" ";
+		        news+=st.top();
+		        st.pop();
+		    }
+		    s = news;
+		}
+		else if(st.size()==1)
+		    s = st.top();
+		else
+		    s = "";
+	}
 };
