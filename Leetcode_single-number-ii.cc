@@ -27,3 +27,22 @@ public:
         }
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int singleNumber(int A[], int n) {
+        int ans = 0, bit_check = 0, bit_cnt = 0;
+        for(int i = 0; i<=31; ++i)
+        {
+            bit_check = 1<<i;
+            bit_cnt = 0;
+            for(int j = 0; j<n; ++j)
+                if(A[j] & bit_check)
+                    ++bit_cnt;
+            if(bit_cnt % 3)
+                ans |= bit_check;
+        }
+        return ans;
+    }
+};
