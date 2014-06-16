@@ -42,3 +42,36 @@ public:
         return vec;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    vector<int> searchRange(int A[], int n, int target) {
+        vector<int>ans;
+        int left = 0, right = n-1, mid;
+        while(left <= right)
+        {
+            mid = (left+right)/2;
+            if(A[mid]<target)
+                left = mid+1;
+            else if(A[mid]>target)
+                right = mid-1;
+            else
+            {
+                left = mid - 1;
+                right = mid + 1;
+                while(left>=0 && A[left]==target)
+                    --left;
+                while(right < n && A[right]==target)
+                    ++right;
+                ans.push_back(left+1);
+                ans.push_back(right-1);
+                return ans;
+            }
+        }
+        ans.push_back(-1);
+        ans.push_back(-1);
+        return ans;
+    }
+};
+
