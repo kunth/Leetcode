@@ -45,3 +45,46 @@ public:
         return st.top();
     }
 };
+
+//SECOND TRIAL, almost the same
+class Solution {
+public:
+    int evalRPN(vector<string> &tokens) {
+        if(tokens.empty())
+            return 0;
+        stack<int>st;
+        stringstream ss;
+        int x, y;
+        string str;
+        for(int i = 0; i<tokens.size(); ++i)
+        {
+            if(tokens[i]=="+" || tokens[i]=="-" || tokens[i]=="*" || tokens[i]=="/")
+            {
+                y = st.top();
+                st.pop();
+                x = st.top();
+                st.pop();
+                if(tokens[i]=="+")
+                    x += y;
+                else if(tokens[i]=="-")
+                    x -= y;
+                else if(tokens[i]=="*")
+                    x *= y;
+                else
+                    x /= y;
+                    
+                st.push(x);
+            }
+            else
+            {
+                str = tokens[i];
+                ss << str;
+                ss >> x;
+                st.push(x);
+                ss.str("");
+                ss.clear();
+            }
+        }
+        return st.top();
+    }
+};
