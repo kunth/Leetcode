@@ -30,7 +30,7 @@ public:
     }
 };
 
-//second trial
+//SECOND TRIAL
 class Solution {
 public:
     void sortColors(int A[], int n) {
@@ -45,6 +45,26 @@ public:
                 ++k;
             if(i>k)
                 k = i;
+        }
+    }
+};
+
+//Thrid trial
+class Solution {
+public:
+    void sortColors(int A[], int n) {
+        int cur = 0, left = 0, right = n-1;
+        while(cur<=right)
+        {
+            if(A[cur]==0)
+                swap(A[left++], A[cur]);
+            else if(A[cur]==2)
+                swap(A[right--], A[cur]);
+            else
+                ++cur;
+            
+            if(left > cur)
+                cur = left;
         }
     }
 };
