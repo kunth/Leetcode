@@ -24,3 +24,40 @@ public:
         return maxlen;
     }
 };
+
+//SECOND TRIAL, although unordered_map is supposed to be O(n), but it is slower than map in this case
+class Solution {
+public:
+    int longestConsecutive(vector<int> &num) {
+        if(num.empty())
+            return 0;
+        unordered_map<int, bool>hashmap;
+        for(int i = 0; i<num.size(); ++i)
+            hashmap[num[i]] = true;
+        int ans = 0, cnt = 0, val = 0;
+        while(!hashmap.empty())
+        {
+            auto it = hashmap.begin();
+            val = it->first;
+            cnt = 0;
+            auto eraseIt = hashmap.find(++val);
+            while(eraseIt!=hashmap.end())
+            {
+                hashmap.erase(eraseIt);
+                eraseIt = hashmap.find(++val);
+                ++cnt;
+            }
+            val = it->first;
+            eraseIt = hashmap.find(--val);
+            while(eraseIt!=hashmap.end())
+            {
+                hashmap.erase(eraseIt);
+                eraseIt = hashmap.find(--val);
+                ++cnt;
+            }
+            hashmap.erase(hashmap.begin());
+            ans = max(ans, 1+cnt);
+        }
+        return ans;
+    }
+};
