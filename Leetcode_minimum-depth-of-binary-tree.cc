@@ -43,3 +43,37 @@ public:
         }
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int minDepth(TreeNode *root) {
+        if(!root)
+            return 0;
+        queue<TreeNode*>treeq;
+        queue<int>depthq;
+        treeq.push(root);
+        depthq.push(1);
+        TreeNode* cur = NULL;
+        int depth = 0;
+        while(!treeq.empty())
+        {
+            cur = treeq.front();
+            depth = depthq.front();
+            treeq.pop();
+            depthq.pop();
+            if(!cur->left && !cur->right)
+                return depth;
+            if(cur->left)
+            {
+                treeq.push(cur->left);
+                depthq.push(1+depth);
+            }
+            if(cur->right)
+            {
+                treeq.push(cur->right);
+                depthq.push(1+depth);
+            }
+        }
+    }
+};
