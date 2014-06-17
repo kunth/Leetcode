@@ -15,3 +15,21 @@ public:
         return arr[n];
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<=0)
+            return 0;
+        int sum = 2;
+        vector<int>vec;
+        vec.push_back(1);
+        while(sum>=0)
+        {
+            vec.push_back(sum);
+            sum = vec[vec.size()-1] + vec[vec.size()-2];
+        }
+        return vec[n-1];
+    }
+};
