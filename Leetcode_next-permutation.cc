@@ -58,3 +58,32 @@ public:
         }
     }
 };
+
+//Thrid trial
+class Solution {
+public:
+    void nextPermutation(vector<int> &num) {
+        if(num.empty())
+            return;
+        int sz = num.size(), pos = 0;
+        for(pos = sz-1; pos>=1; --pos)
+        {
+            if(num[pos]>num[pos-1])
+                break;
+        }
+        if(!pos)
+            reverse(num.begin(), num.end());
+        else
+        {
+            for(int i = sz-1; i>=pos; --i)
+            {
+                if(num[i]>num[pos-1])
+                {
+                    swap(num[i], num[pos-1]);
+                    break;
+                }
+            }
+            reverse(num.begin()+pos, num.end());
+        }
+    }
+};
