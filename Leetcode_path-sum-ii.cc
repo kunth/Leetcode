@@ -44,3 +44,33 @@ public:
         return res;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    vector<vector<int> >ans;
+    void dfs(vector<int>&path, TreeNode* root, int sum)
+    {
+        if(sum==root->val && !root->left && !root->right)
+        {
+            path.push_back(root->val);
+            ans.push_back(path);
+            path.pop_back();
+            return;
+        }
+        path.push_back(root->val);
+        if(root->left)
+            dfs(path, root->left, sum-root->val);
+        if(root->right)
+            dfs(path, root->right, sum-root->val);
+        path.pop_back();
+    }
+public:
+    vector<vector<int> > pathSum(TreeNode *root, int sum) {
+        if(!root)
+            return ans;
+        vector<int>path;
+        dfs(path, root, sum);
+        return ans;
+    }
+};
