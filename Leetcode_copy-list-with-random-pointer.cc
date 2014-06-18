@@ -37,3 +37,30 @@ public:
         return newhead;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    RandomListNode *copyRandomList(RandomListNode *head) {
+        if(!head)
+            return head;
+        unordered_map<RandomListNode*, RandomListNode*>mp;
+        RandomListNode *p = head, *q = NULL, *pre = NULL;
+        while(p)
+        {
+            q = new RandomListNode(p->label);
+            mp[p] = q;
+            p = p->next;
+            if(pre)
+                pre->next = q;
+            pre = q;
+        }
+        p = head;
+        while(p)
+        {
+            mp[p]->random = mp[p->random];
+            p = p->next;
+        }
+        return mp[head];
+    }
+};
