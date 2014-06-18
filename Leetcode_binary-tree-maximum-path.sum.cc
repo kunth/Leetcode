@@ -27,3 +27,25 @@ public:
         return ans;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    int ans = INT_MIN;
+    int find_max(TreeNode* root)
+    {
+        if(!root)
+            return 0;
+        int left = find_max(root->left);
+        int right = find_max(root->right);
+        ans = max(ans, root->val + max(0, left) + max(0, right));
+        return root->val + max(0, max(left, right));
+    }
+public:
+    int maxPathSum(TreeNode *root) {
+        if(!root)
+            return 0;
+        find_max(root);
+        return ans;
+    }
+};
