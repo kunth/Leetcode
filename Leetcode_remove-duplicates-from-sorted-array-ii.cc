@@ -27,3 +27,28 @@ public:
         return n;
     }
 };
+
+//SECOND TRIAL, in place
+class Solution {
+public:
+    int removeDuplicates(int A[], int n) {
+        if(n<=2)
+            return n;
+        int len = 1;
+        bool flag = true;
+        for(int i = 1; i<n; ++i)
+        {
+            if(A[i]!=A[len-1])
+            {
+                A[len++] = A[i];
+                flag = true;
+            }
+            else if(flag)
+            {
+                A[len++] = A[i];
+                flag = false;
+            }
+        }
+        return len;
+    }
+};
