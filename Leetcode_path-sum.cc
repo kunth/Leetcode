@@ -35,3 +35,27 @@ public:
         return dfs(root, sum);
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    bool dfs(TreeNode* root, int left)
+    {
+        if(left-root->val == 0 && !root->left && !root->right)
+            return true;
+        else
+        {
+            if(root->left && dfs(root->left, left-root->val))
+                return true;
+            if(root->right && dfs(root->right, left-root->val))
+                return true;
+            return false;
+        }
+    }
+public:
+    bool hasPathSum(TreeNode *root, int sum) {
+        if(!root)
+            return false;
+        return dfs(root, sum);
+    }
+};
