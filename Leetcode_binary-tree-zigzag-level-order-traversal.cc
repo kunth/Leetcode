@@ -52,3 +52,38 @@ public:
         return res;
     }
 };
+
+//SECOND TRAIL
+class Solution {
+public:
+    vector<vector<int> > zigzagLevelOrder(TreeNode *root) {
+        vector<vector<int> >ans;
+        if(!root)
+            return ans;
+        queue<TreeNode*>treeq;
+        treeq.push(root);
+        TreeNode* cur = NULL;
+        bool flag = true;
+        while(!treeq.empty())
+        {
+            int sz = (int)treeq.size();
+            vector<int>vec;
+            while(sz--)
+            {
+                cur = treeq.front();
+                treeq.pop();
+                vec.push_back(cur->val);
+                if(cur->left)
+                    treeq.push(cur->left);
+                if(cur->right)
+                    treeq.push(cur->right);
+            }
+            if(!flag)
+                reverse(vec.begin(), vec.end());
+                
+            ans.push_back(vec);
+            flag = !flag;
+        }
+        return ans;
+    }
+};
