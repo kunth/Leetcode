@@ -46,3 +46,35 @@ public:
         return res;
     }
 };
+
+//SECOND TRAIL
+class Solution {
+public:
+    vector<vector<int> > levelOrder(TreeNode *root) {
+        vector<vector<int> >ans;
+        if(!root)
+            return ans;
+        int sz = 0;
+        TreeNode*cur = NULL;
+        queue<TreeNode*>tq;
+        tq.push(root);
+        while(!tq.empty())
+        {
+            sz = (int)tq.size();
+            vector<int>vec;
+            while(sz)
+            {
+                --sz;
+                cur = tq.front();
+                tq.pop();
+                vec.push_back(cur->val);
+                if(cur->left)
+                    tq.push(cur->left);
+                if(cur->right)
+                    tq.push(cur->right);
+            }
+            ans.push_back(vec);
+        }
+        return ans;
+    }
+};
