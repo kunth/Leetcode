@@ -36,3 +36,31 @@ public:
         return max_depth;
     }
 };
+
+//SECOND TRIAL, bfs
+class Solution {
+public:
+    int maxDepth(TreeNode *root) {
+        if(!root)
+            return 0;
+        queue<TreeNode*>treeq;
+        treeq.push(root);
+        TreeNode* cur = NULL;
+        int ans = 0;
+        while(!treeq.empty())
+        {
+            int sz = treeq.size();
+            ++ans;
+            while(sz--)
+            {
+                cur = treeq.front();
+                treeq.pop();
+                if(cur->left)
+                    treeq.push(cur->left);
+                if(cur->right)
+                    treeq.push(cur->right);
+            }
+        }
+        return ans;
+    }
+};
