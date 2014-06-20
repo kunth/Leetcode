@@ -50,3 +50,59 @@ public:
         return head;
     }
 };
+
+//SECOND TRIAL
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        if(!head)
+            return head;
+        ListNode *pre = head, *mid = head, *cur = head->next;
+        while(cur)
+        {
+            if(cur->val != mid->val)
+            {
+                pre = mid;
+                mid = cur;
+                cur = cur->next;
+            }
+            else
+            {
+                if(pre==mid)
+                {
+                    while(cur && cur->val == mid->val)
+                        cur = cur->next;
+                    if(cur)
+                    {
+                        head = pre = mid = cur;
+                        cur = cur->next;
+                    }
+                    else
+                        return NULL;
+                }
+                else
+                {
+                    while(cur && cur->val == mid->val)
+                        cur = cur->next;
+                    if(cur)
+                    {
+                        mid = cur;
+                        pre->next = mid;
+                        cur = cur->next;
+                    }
+                    else
+                        pre->next = NULL;
+                }
+            }
+        }
+        return head;
+    }
+};
