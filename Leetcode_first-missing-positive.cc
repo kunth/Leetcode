@@ -29,12 +29,9 @@ public:
             if(A[k]>0 && A[k]<=n)
             {
                 if(A[k]<=k+1)
-                {
-                    A[A[k]-1] = A[k];
-                    ++k;
-                }
+                    A[A[k]-1] = A[k++];
                 else if(A[A[k]-1]<=0 || A[A[k]-1]>n)
-                    A[A[k]-1] = A[k];
+                    A[A[k]-1] = A[k++];
                 else if(A[A[k]-1]!=A[k])
                     swap(A[k], A[A[k]-1]);
                 else
