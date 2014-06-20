@@ -32,7 +32,7 @@ public:
     }
 };
 
-//SECOND TRIAL
+//SECOND TRIAL, average running time O(lgn), worst time O(n)
 class Solution {
 private:
     bool rotatedSearch(int A[], int left, int right, int target)
