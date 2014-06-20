@@ -31,3 +31,38 @@ public:
             return true;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    bool rotatedSearch(int A[], int left, int right, int target)
+    {
+        if(!A || left > right)
+            return false;
+        int mid = (left+right)/2;
+        if(A[mid]==target || A[left]==target || A[right]==target)
+            return true;
+        if(A[left]<A[mid])
+        {
+            if(target>A[left] && target<A[mid] && rotatedSearch(A, left+1, mid-1, target))
+                return true;
+            return rotatedSearch(A, mid+1, right-1, target);
+        }
+        else if(A[left]>A[mid])
+        {
+            if(target>A[mid] && target<A[right] && rotatedSearch(A, mid+1, right-1, target))
+                return true;
+            return rotatedSearch(A, left+1, mid-1, target);
+        }
+        else
+        {
+            if(rotatedSearch(A, left+1, mid-1, target))
+                return true;
+            return rotatedSearch(A, mid+1, right-1, target);
+        }
+    }
+public:
+    bool search(int A[], int n, int target) {
+        return rotatedSearch(A, 0, n-1, target);
+    }
+};
