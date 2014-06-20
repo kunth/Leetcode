@@ -33,3 +33,26 @@ public:
         return head;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    ListNode *deleteDuplicates(ListNode *head) {
+        if(!head)
+            return head;
+        ListNode *pre = head, *p = head->next;
+        int last = head->val;
+        while(p)
+        {
+            if(p->val != last)
+            {
+                last = p->val;
+                pre = p;
+            }
+            else
+                pre->next = p->next;
+            p = p->next;
+        }
+        return head;
+    }
+};
