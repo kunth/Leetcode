@@ -17,7 +17,7 @@ class Solution:
             if not obstacleGrid[0][i]:
                 obstacleGrid[0][i] = -1
             else:
-                break;
+                break
         for i in range(1, row):
             for j in range(1, col):
                 if obstacleGrid[i][j]:
