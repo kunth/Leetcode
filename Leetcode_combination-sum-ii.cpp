@@ -31,3 +31,44 @@ public:
         return ans;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    vector<vector<int> >ans;
+    vector<int>num;
+    void dfs(vector<int>&vec, vector<bool>&visited, int left)
+    {
+        if(!left)
+        {
+            ans.push_back(vec);
+            return;
+        }
+        for(int i = 0; i<num.size(); ++i)
+        {
+            if(num[i] > left)
+                break;
+            if(i && num[i]==num[i-1] && !visited[i-1])
+                continue;
+            if(!visited[i] && (vec.empty() || num[i]>=vec.back()))
+            {
+                visited[i] = true;
+                vec.push_back(num[i]);
+                dfs(vec, visited, left-num[i]);
+                vec.pop_back();
+                visited[i] = false;
+            }
+        }
+    }
+public:
+    vector<vector<int> > combinationSum2(vector<int> &num, int target) {
+        if(num.empty())
+            return ans;
+        vector<int>vec;
+        sort(num.begin(), num.end());
+        this->num = num;
+        vector<bool>visited(num.size(), false);
+        dfs(vec, visited, target);
+        return ans;
+    }
+};

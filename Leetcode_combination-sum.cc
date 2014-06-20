@@ -29,3 +29,42 @@ public:
         return ans;
     }
 };
+
+//SECOND TRIAL, almost the same
+class Solution {
+private:
+    vector<int>candidates;
+    vector<vector<int> >ans;
+    void dfs(vector<int>&vec, int left)
+    {
+        if(!left)
+        {
+            ans.push_back(vec);
+            return;
+        }
+        for(int i = 0; i<candidates.size(); ++i)
+        {
+            if(left-candidates[i]>=0)
+            {
+                if(vec.empty() || candidates[i]>=vec.back())
+                {
+                    vec.push_back(candidates[i]);
+                    dfs(vec, left-candidates[i]);
+                    vec.pop_back();
+                }
+            }
+            else
+                break;
+        }
+    }
+public:
+    vector<vector<int> > combinationSum(vector<int> &candidates, int target) {
+        if(candidates.empty())
+            return this->ans;
+        sort(candidates.begin(), candidates.end());
+        this->candidates = candidates;
+        vector<int>vec;
+        dfs(vec, target);
+        return this->ans;
+    }
+};
