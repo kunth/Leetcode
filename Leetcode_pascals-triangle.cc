@@ -27,3 +27,24 @@ public:
         return res;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    vector<vector<int> > generate(int numRows) {
+        vector<vector<int> >ans;
+        if(numRows<=0)
+            return ans;
+        for(int i = 0; i<numRows; ++i)
+        {
+            vector<int>vec(i+1, 1);
+            for(int j = 0; j <= i; ++j)
+            {
+                if(j>0 && j<i)
+                    vec[j] = ans[i-1][j-1]+ans[i-1][j];
+            }
+            ans.push_back(vec);
+        }
+        return ans;
+    }
+};
