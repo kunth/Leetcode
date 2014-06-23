@@ -51,3 +51,37 @@ public:
         return res;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode *root) {
+        vector<int>ans;
+        stack<TreeNode*>st;
+        TreeNode *p = root;
+        while(p)
+        {
+            while(p)
+            {
+                st.push(p);
+                p = p->left;
+            }
+            if(!st.empty())
+            {
+                while(!st.empty() && !st.top()->right)
+                {
+                    ans.push_back(st.top()->val);
+                    st.pop();
+                }
+                if(st.empty())
+                    break;
+
+                p = st.top();
+                ans.push_back(p->val);
+                st.pop();
+                p = p->right;
+            }
+        }
+        return ans;
+    }
+};
