@@ -31,7 +31,7 @@ public:
                 vec.pop_back();
             }
         }
-        else 
+        else
         {
             vector<bool>flag(n, false);
             int num = vec.size(), diff;
@@ -64,3 +64,48 @@ public:
         return ans;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+private:
+    unordered_map<int, bool>addmp, minusmp;
+    string str;
+    int n;
+    void dfs(vector<vector<string> >&ans, vector<string>&vec, vector<bool>&vrow, vector<bool>&vcol, int begin)
+    {
+        if(begin==n && vec.size()==n)
+        {
+            ans.push_back(vec);
+            return;
+        }
+        for(int j = 0; j<n; ++j)
+        {
+            if(!vrow[begin] && !vcol[j] && !addmp[begin+j] && !minusmp[begin-j])
+            {
+                vrow[begin] = vcol[j] = addmp[begin+j] = minusmp[begin-j] = true;
+                string s = str;
+                s[j] = 'Q';
+                vec.push_back(s);
+                dfs(ans, vec, vrow, vcol, begin+1);
+                vec.pop_back();
+                vrow[begin] = vcol[j] = addmp[begin+j] = minusmp[begin-j] = false;
+            }
+        }
+    }
+public:
+    vector<vector<string> > solveNQueens(int n) {
+        vector<vector<string> >ans;
+        if(n<1)
+            return ans;
+        addmp.clear();
+        minusmp.clear();
+        this->n = n;
+        for(int i = 0; i<n; ++i)
+            str += '.';
+        vector<bool>vrow(n, false), vcol(n, false);
+        vector<string>vec;
+        dfs(ans, vec, vrow, vcol, 0);
+        return ans;
+    }
+};
+
