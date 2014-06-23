@@ -50,3 +50,20 @@ public:
         }
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int>v1(rowIndex, 1), v2(rowIndex+1, 1);
+        if(rowIndex<=1)
+            return v2;
+        for(int i = 2; i<=rowIndex; ++i)
+        {
+            for(int j = 1; j<i; ++j)
+                v2[j] = v1[j-1] + v1[j];
+            v1 = v2;
+        }
+        return v2;
+    }
+};
