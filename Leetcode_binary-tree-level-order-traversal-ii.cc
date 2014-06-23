@@ -43,3 +43,35 @@ public:
         return res;
     }
 };
+
+//SECOND TRIAL, almost the same
+class Solution {
+public:
+    vector<vector<int> > levelOrderBottom(TreeNode *root) {
+        vector<vector<int> >ans;
+        if(!root)
+            return ans;
+        queue<TreeNode*>treeq;
+        treeq.push(root);
+        TreeNode *cur = NULL;
+        int sz = 0;
+        while(!treeq.empty())
+        {
+            vector<int>v;
+            sz = treeq.size();
+            while(sz--)
+            {
+                cur = treeq.front();
+                treeq.pop();
+                v.push_back(cur->val);
+                if(cur->left)
+                    treeq.push(cur->left);
+                if(cur->right)
+                    treeq.push(cur->right);
+            }
+            ans.push_back(v);
+        }
+        reverse(ans.begin(), ans.end());
+        return ans;
+    }
+};

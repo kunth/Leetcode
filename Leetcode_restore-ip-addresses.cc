@@ -45,7 +45,7 @@ public:
     }
 };
 
-//SECOND TRIAL
+//SECOND TRIAL, 40MS
 class Solution {
 private:
     void dfs(vector<string>&ans, string dst, string src, int cnt)
