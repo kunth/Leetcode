@@ -45,3 +45,35 @@ public:
         return tree_head;
     }
 };
+
+//SECOND TRIAL, important
+class Solution {
+public:
+    TreeNode *sortedListToBST(ListNode *head) {
+        if(!head)
+            return NULL;
+        if(!head->next)
+        {
+            TreeNode*root = new TreeNode(head->val);
+            return root;
+        }
+        ListNode *fast = head, *slow = head, *pre = NULL;
+        while(fast)
+        {
+            fast = fast->next;
+            if(fast)
+            {
+                fast = fast->next;
+                pre = slow;
+                slow = slow->next;
+            }
+        }
+        slow = pre->next;
+        TreeNode* root = new TreeNode(slow->val);
+        pre->next = NULL;
+        slow = slow->next;
+        root->left = sortedListToBST(head);
+        root->right = sortedListToBST(slow);
+        return root;
+    }
+};
