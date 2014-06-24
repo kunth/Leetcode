@@ -21,3 +21,28 @@ public:
         }
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int jump(int A[], int n) {
+        if(n==1)
+            return 0;
+        if(A[0]>=n-1)
+            return 1;
+        int ans = 1, begin = 0, end = A[0], step = 0;
+        while(1)
+        {
+            while(begin<=end)
+            {
+                step = max(step, begin+A[begin]);
+                ++begin;
+            }
+            if(step>=n-1)
+                return 1+ans;
+            begin = end;
+            end = step;
+            ++ans;
+        }
+    }
+};
