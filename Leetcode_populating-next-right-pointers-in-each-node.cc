@@ -6,7 +6,8 @@
  *  TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
  * };
  */
-//96ms
+
+//96ms, constant space
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
@@ -23,7 +24,7 @@ public:
 };
 
 
-//or the below one, 88ms
+//or the below one, 88ms, O(lgn) extra space
 class Solution {
 public:
     void connect(TreeLinkNode *root) {
@@ -51,6 +52,24 @@ public:
                 cur->next = pre = NULL;
                 levelsum*=2;
             }
+        }
+    }
+};
+
+//SECOND TRIAL
+class Solution {
+public:
+    void connect(TreeLinkNode *root) {
+        if(!root)
+            return;
+        if(root->left)
+        {
+            root->left->next = root->right;
+            if(root->next)
+                root->right->next = root->next->left;
+
+            connect(root->left);
+            connect(root->right);
         }
     }
 };
