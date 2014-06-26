@@ -16,3 +16,21 @@ public:
         return res;
     }
 };
+
+//SECOND TRIAL
+class Solution {
+public:
+    int lengthOfLastWord(const char *s) {
+        if(!s)
+            return 0;
+        int end = strlen(s)-1, ans = 0;
+        while(0<=end && *(s+end)==' ')
+            --end;
+        if(0>end)
+            return 0;
+        ans = end;
+        while(end>=0 && isalpha(*(s+end)))
+            --end;
+        return ans-end;
+    }
+};
