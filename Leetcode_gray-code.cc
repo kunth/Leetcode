@@ -10,3 +10,20 @@ public:
         return ans;
     }
 };
+
+//
+class Solution {
+public:
+    vector<int> grayCode(int n) {
+        int sum = 1, num = 0;
+        for(int i = 0; i<n; ++i)
+            sum *= 2;
+        vector<int>ans;
+        for(int i = 0; i<sum; ++i)
+        {
+            num = i ^ i/2;
+            ans.push_back(num);
+        }
+        return ans;
+    }
+};
