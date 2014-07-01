@@ -38,7 +38,57 @@ public:
     }
 };
 
-//Sorry, the last code is too horrible to see it again.
+//Solution 2:
+class Solution {
+public:
+    double pow(double x, int n) {
+        if(abs(fabs(x)-1)<10e-8)
+        {
+            if(x<0)
+            {
+                if(n==-n)
+                    return -x;
+                return n%2 ? x : -x;
+            }
+            return x;
+        }
+        if(!x)
+            return 0;
+        if(n==0)
+            return 1;
+        bool f = true;
+        if(n<0)
+            f = (n = -n, false);
+        if(n==1)
+            return f ? x : 1/x;
+        double ans = 1.0, tmp = x;
+        int cnt = 1;
+        while(n)
+        {
+            if(cnt+cnt<=n)
+            {
+                while(cnt + cnt <= n)
+                {
+                    cnt += cnt;
+                    tmp *= tmp;
+                    if(fabs(tmp)<10e-8)
+                        return 0;
+                }
+                n -= cnt;
+                ans *= tmp;
+            }
+            if(!n)
+                return f ? ans : 1/ans;
+            cnt = 1;
+            ans *= x;
+            --n;
+            tmp = x;
+        }
+        return f ? ans : 1/ans;
+    }
+};
+
+//The 2 above codes are too horrible to see it again.
 //Here is the better code:
 
 class Solution {
