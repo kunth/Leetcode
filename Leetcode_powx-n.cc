@@ -113,3 +113,22 @@ public:
         return 1.0 / ans;
     }
 };
+
+//Solution same with above
+class Solution {
+public:
+    double pow(double x, int n) {
+        bool f = true;
+        if(n<0)
+            f = (n = -n, false);
+        double ans = 1.0;
+        while(n)
+        {
+            if(n%2)
+                ans *= x;
+            x*=x;
+            n/=2;
+        }
+        return f ? ans : 1/ans;
+    }
+};
