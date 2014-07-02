@@ -42,3 +42,30 @@ public:
         return ret;
     }
 };
+
+//Solution Two
+class Solution {
+public:
+    int canCompleteCircuit(vector<int> &gas, vector<int> &cost) {
+        int gas_sum = accumulate(gas.begin(), gas.end(), 0);
+        int cost_sum = accumulate(cost.begin(), cost.end(), 0);
+        if(gas_sum < cost_sum)
+            return -1;
+        int begin = 0, end = 0;
+        int left = 0;
+        do
+        {
+            if(gas[begin]>=cost[begin])
+                left += (gas[begin]-cost[begin++]);
+            else if(gas[begin]+left>=cost[begin])
+                left -= (cost[begin]-gas[begin++]);
+            else// if(gas[end]-cost[end]+left>=cost[begin]-gas[begin])
+            {
+                end = (end + gas.size()-1) % gas.size();
+                left += gas[end]-cost[end];
+            }
+        }
+        while(begin < (end+gas.size()-1)%gas.size());
+        return end;
+    }
+};
