@@ -38,3 +38,36 @@ public:
         return newhead;
     }
 };
+
+//Solution Two
+class Solution {
+public:
+    ListNode *rotateRight(ListNode *head, int k) {
+        if(!head || !k || !head->next)
+            return head;
+        int len = 0;
+        ListNode *p = head;
+        while(p)
+        {
+            ++len;
+            p = p->next;
+        }
+        k %= len;
+        if(!k)
+            return head;
+        k = len-k;
+        ListNode *ret = head, *pre = NULL;
+        while(k)
+        {
+            pre = ret;
+            ret = ret->next;
+            --k;
+        }
+        pre->next = NULL;
+        p = ret;
+        while(p->next)
+            p = p->next;
+        p->next = head;
+        return ret;
+    }
+};
