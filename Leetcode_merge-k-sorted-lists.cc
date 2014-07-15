@@ -45,3 +45,36 @@ public:
         return NULL;
     }
 };
+
+//Solution two
+class Solution {
+public:
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        ListNode *head = NULL, *cur = NULL, *pre = NULL;
+        if(lists.empty())
+            return NULL;
+        vector<int>vec;
+        for(int i = 0; i<lists.size(); ++i)
+        {
+            cur = lists[i];
+            if(!head)
+                head = cur;
+            else
+                pre->next = cur;
+            while(cur)
+            {
+                pre = cur;
+                vec.push_back(cur->val);
+                cur = cur->next;
+            }
+        }
+        sort(vec.begin(), vec.end());
+        cur = head;
+        for(int i = 0; i<vec.size(); ++i)
+        {
+            cur->val = vec[i];
+            cur = cur->next;
+        }
+        return head;
+    }
+};
