@@ -35,3 +35,33 @@ public:
         return vec;
     }
 };
+
+//Sloution Two
+class Solution {
+public:
+    vector<int> preorderTraversal(TreeNode *root) {
+        vector<int>ans;
+        TreeNode *cur = root, *last = NULL;
+        stack<TreeNode*>st;
+        while(cur){
+            st.push(cur);
+            ans.push_back(cur->val);    
+            cur = cur->left;
+        }
+        while(!st.empty()){
+            cur = st.top();
+            if(cur->right){
+                st.pop();
+                cur = cur->right;
+                while(cur){
+                    st.push(cur);
+                    ans.push_back(cur->val);
+                    cur = cur->left;
+                }
+            }
+            else
+                st.pop();
+        }
+        return ans;
+    }
+};
