@@ -29,3 +29,31 @@ public:
     }
 };
 
+//Solution Two
+class Solution {
+    void dfs(vector<vector<int> >&ans, vector<int>&S, vector<int>&vec, vector<bool>&visited, int step){
+        if(step==S.size()){
+            ans.push_back(vec);
+            return;
+        }
+        if(step && S[step] == S[step-1] && !visited[step-1]){
+            dfs(ans, S, vec, visited, step+1);
+            return;
+        }
+        vec.push_back(S[step]);
+        visited[step] = true;
+        dfs(ans, S, vec, visited, step+1);
+        visited[step] = false;
+        vec.pop_back();
+        dfs(ans, S, vec, visited, step+1);
+    }
+public:
+    vector<vector<int> > subsetsWithDup(vector<int> &S) {
+        vector<vector<int> >ans;
+        sort(S.begin(), S.end());
+        vector<bool>visited(S.size(), false);
+        vector<int>vec;
+        dfs(ans, S, vec, visited, 0);
+        return ans;
+    }
+};
