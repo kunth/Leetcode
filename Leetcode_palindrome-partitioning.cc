@@ -1,5 +1,5 @@
 class Solution {
-public:
+private:
     void dfs(vector<vector<string>>&ans, vector<string>&vec, string tmpstr, string s)
     {
         if(s.empty())
@@ -29,15 +29,15 @@ public:
 	    dfs(ans, vec, str, s.substr(1));
 	}
 }
-
-	vector<vector<string>> partition(string s) {
-	    vector<vector<string>>ans;
-	    if(s.empty())
-		return ans;
-	    vector<string>vec;
-	    dfs(ans, vec, "", s);
-	    return ans;
-	}
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>>ans;
+        if(s.empty())
+            return ans;
+	vector<string>vec;
+	dfs(ans, vec, "", s);
+	return ans;
+    }
 };
 
 
