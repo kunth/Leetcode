@@ -1,9 +1,9 @@
 class Solution {
 public:
-	void dfs(vector<vector<string>>&ans, vector<string>&vec, string tmpstr, string s)
+    void dfs(vector<vector<string>>&ans, vector<string>&vec, string tmpstr, string s)
     {
-		if(s.empty())
-		{
+        if(s.empty())
+        {
 			if(tmpstr.empty())
 			    ans.push_back(vec);
 			return;
