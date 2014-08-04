@@ -39,3 +39,35 @@ public:
 		return ans;
 	}
 };
+
+
+//Second solution
+class Solution {
+private:
+    void dfs(vector<vector<string>>&ans, vector<string>&vec, string s) {
+        if(s.empty()) {
+            ans.push_back(vec);
+            return;
+        }
+        string str = s.substr(0, 1);
+        vec.push_back(str);
+        dfs(ans, vec, s.substr(1));
+        vec.pop_back();
+        for(int i = 2; i<=s.length(); ++i) {
+            string s1 = s.substr(0, i);
+            string s2(s1.rbegin(), s1.rend());
+            if(s1 == s2) {
+                vec.push_back(s1);
+                dfs(ans, vec, s.substr(i));
+                vec.pop_back();
+            }
+        }
+    }
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>>ans;
+        vector<string>vec;
+        dfs(ans, vec, s);
+        return ans;
+    }
+};
