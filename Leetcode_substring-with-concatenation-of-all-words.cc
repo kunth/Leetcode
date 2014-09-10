@@ -1,5 +1,39 @@
-//AC
+//Second Trial, 1400ms+
+class Solution {
+public:
+    vector<int> findSubstring(string S, vector<string> &L) {
+        vector<int>ans;
+        if(S.empty() || L.empty())
+            return ans;
+        int wordSz = L.size(), wordLen = L[0].length();
+        int len = wordSz * wordLen;
+        string word;
+        bool tag;
+        unordered_map<string, int>dm, lm;
+        for(int i = 0; i<wordSz; ++i){
+            ++lm[L[i]];
+        }
+        for(int i = 0; i + len <= S.length(); ++i) {
+            dm.clear();
+            tag = true;
+            for(int j = 0; j < wordSz; ++j) {
+                word = S.substr(i+j*wordLen, wordLen);
+                if(dm[word] < lm[word]) {
+                    ++dm[word];
+                }else {
+                    tag = false;
+                    break;
+                }
+            }
+            if(tag) {
+                ans.push_back(i);
+            }
+        }
+        return ans;
+    }
+};
 
+//AC
 class Solution {
 public:
     vector<int> findSubstring(string S, vector<string> &L) {
@@ -10,7 +44,7 @@ public:
         map<string, int>dm, tmpm;
         for(int i = 0; i<L.size(); ++i)
             dm[L[i]] = dm[L[i]]==0 ? 1 : dm[L[i]]+1;
-        
+
         for(int i = 0; i + one_word_len*L.size() <= S.length(); ++i)
         {
             int j = 0;
@@ -35,7 +69,6 @@ public:
 };
 
 //TLE
-
 class Solution {
 public:
     vector<int> findSubstring(string S, vector<string> &L) {

@@ -46,3 +46,37 @@ public:
         return dm[node->label];
     }
 };
+
+//Solution Two, which seems to be simpler
+//264ms
+class Solution {
+private:
+    unordered_map<UndirectedGraphNode*, UndirectedGraphNode*>dm;
+    UndirectedGraphNode* dfs_create(UndirectedGraphNode* node) {
+        if(!dm[node]) {
+            dm[node] = new UndirectedGraphNode(node->label);
+            for(int i = 0; i<node->neighbors.size(); ++i) {
+                dfs_create(node->neighbors[i]);
+            }
+        }
+        return dm[node];
+    }
+
+    void dfs_completeNeighbors(UndirectedGraphNode* node) {
+        if(dm[node]->neighbors.empty()) {
+           for(int i = 0; i<node->neighbors.size(); ++i) {
+               dm[node]->neighbors.push_back(dm[node->neighbors[i]]);
+               dfs_completeNeighbors(node->neighbors[i]);
+           }
+        }
+    }
+public:
+    UndirectedGraphNode *cloneGraph(UndirectedGraphNode *node) {
+        if(!node)
+            return NULL;
+        dm.clear();
+        UndirectedGraphNode* ret = dfs_create(node);
+        dfs_completeNeighbors(node);
+        return ret;
+    }
+};
