@@ -98,3 +98,36 @@ public:
         return newHead;
     }
 };
+
+//Third Solution
+class Solution {
+public:
+    ListNode *partition(ListNode *head, int x) {
+        if(!head)
+            return NULL;
+        ListNode *cur = head, *left = NULL, *right = NULL, *curLeft = NULL, *curRight = NULL;
+        while(cur) {
+            if(cur->val < x) {
+                if(left)
+                    curLeft = curLeft->next = cur;
+                else
+                    left = curLeft = cur;
+            } else {
+                if(right)
+                    curRight = curRight->next = cur;
+                else
+                    right = curRight = cur;
+            }
+            cur = cur->next;
+        }
+        if(left) {
+            curLeft->next = right;
+            if(right)
+                curRight->next = NULL;
+            return left;
+        } else {
+            curRight->next = NULL;
+            return right;
+        }
+    }
+};
