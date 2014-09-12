@@ -42,3 +42,32 @@ public:
         return str;
     }
 };
+
+//Solution Two, simpler code
+class Solution {
+public:
+    string countAndSay(int n) {
+        string newStr, str = "1";
+        char ch;
+        int cnt;
+        for(int i = 1; i<n; ++i) {
+            newStr = "";
+            ch = str[0];
+            cnt = 1;
+            for(int j = 1; j<str.length(); ++j) {
+                if(str[j]==ch)
+                    ++cnt;
+                else {
+                    newStr += (cnt+'0');
+                    newStr += ch;
+                    ch = str[j];
+                    cnt = 1;
+                }
+            }
+            newStr += (cnt+'0');
+            newStr += ch;
+            str = newStr;
+        }
+        return str;
+    }
+};
