@@ -52,3 +52,48 @@ public:
         return res;
     }
 };
+
+//Second trial, which is the same thought, but simplifies the code
+class Solution {
+private:
+    void dfs(vector<string>&ans, vector<string>&vec, string s, unordered_set<string> &dict) {
+        if(s.empty()) {
+            string str = vec[0];
+            for(int i = 1; i<vec.size(); ++i) {
+                str += " ";
+                str += vec[i];
+            }
+            ans.push_back(str);
+        }
+        string word;
+        for(int i = 1; i<=s.length(); ++i) {
+            word = s.substr(0, i);
+            if(dict.find(word)!=dict.end()) {
+                vec.push_back(word);
+                dfs(ans, vec, s.substr(i), dict);
+                vec.pop_back();
+            }
+        }
+    }
+public:
+    vector<string> wordBreak(string s, unordered_set<string> &dict) {
+        vector<string>ans, vec;
+        if(s.empty() || dict.empty())
+            return ans;
+        vector<bool>dp(s.length()+1, false);
+        dp[0] = true;
+        int len;
+        for(int i = 0; i<s.length(); ++i){
+            for(auto it = dict.begin(); it != dict.end(); ++it) {
+                len = (*it).length();
+                if(dp[i] && i+len<=s.length() && s.substr(i, len)==*it)
+                    dp[i+len] = true;
+            }
+            if(dp[s.length()])
+                break;
+        }
+        if(dp[s.length()])
+            dfs(ans, vec, s, dict);
+        return ans;
+    }
+};

@@ -36,3 +36,33 @@ public:
         }
     }
 };
+
+//O(1) Solution(in place)
+class Solution {
+private:
+    TreeNode* dfs(TreeNode *root){
+        if(!root)
+            return NULL;
+        TreeNode *leftNode = root->left;
+        TreeNode *rightNode = root->right;
+        TreeNode *cur = root;
+        if(leftNode){
+            cur->right = leftNode;
+            cur->left = NULL;
+            cur = leftNode;
+            cur = dfs(cur);
+        }
+        if(rightNode) {
+            cur->right = rightNode;
+            cur->left = NULL;
+            cur = cur->right;
+            cur = dfs(cur);
+        }
+        cur->left = NULL;
+        return cur;
+    }
+public:
+    void flatten(TreeNode *root) {
+        dfs(root);
+    }
+};
