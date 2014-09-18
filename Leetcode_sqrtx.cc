@@ -35,3 +35,21 @@ public:
     }
 };
 
+//348ms
+class Solution {
+public:
+    int sqrt(int x) {
+        if(!x || x==1)
+            return x;
+        long long int ans = 2, y = x;
+        while(2) {
+            if(ans*ans > y)
+                break;
+            if(4*ans*ans <= y)
+                ans = 2*ans+1;
+            else
+                ++ans;
+        }
+        return ans-1;
+    }
+};
