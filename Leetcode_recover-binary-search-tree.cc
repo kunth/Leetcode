@@ -42,3 +42,36 @@ public:
             swap(sw1->val, sw2->val);
     }
 };
+
+//Second trial, almost the same
+class Solution {
+private:
+    TreeNode*p1, *p2, *last;
+    void inOrder(TreeNode *root) {
+        if(root->left)
+            inOrder(root->left);
+        if(last) {
+            if(last->val > root->val) {
+                if(!p1) {
+                    p1 = last;
+                    p2 = root;
+                } else {
+                    p2 = root;
+                    return;
+                }
+            }
+        }
+        last = root;
+        if(root->right)
+            inOrder(root->right);
+    }
+public:
+    void recoverTree(TreeNode *root) {
+        if(!root)
+            return;
+        last = p1 = p2 = NULL;
+        inOrder(root);
+        if(p1 && p2)
+            swap(p1->val, p2->val);
+    }
+};
