@@ -41,3 +41,42 @@ public:
         return S.substr(min_start, minlen);
     }
 };
+
+
+//Second trial
+class Solution {
+public:
+    string minWindow(string S, string T) {
+        string ans;
+        if(S.empty() || S.length()<T.length())
+            return ans;
+        vector<int>bucket(256, 0), already(256, 0);
+        int tlen = T.length(), head = 0, tail = 0, cnt = 0;
+        for(int i = 0; i<tlen; ++i)
+            ++bucket[T[i]];
+        while(tail<S.length()) {
+            if(already[S[tail]] < bucket[S[tail]]) {
+                ++already[S[tail]];
+                ++cnt;
+            } else if(bucket[S[tail]]) {
+                ++already[S[tail]];
+            } else {
+                ++tail;
+                continue;
+            }
+            ++tail;
+            if(cnt == tlen) {
+                while(head<tail && (!bucket[S[head]] || already[S[head]]>bucket[S[head]])) {
+                    if(!bucket[S[head]]){
+                        ++head;
+                        continue;
+                    }
+                    --already[S[head++]];
+                }
+                if(head<tail && (ans.empty() || tail-head<ans.length()))
+                    ans = S.substr(head, tail-head);
+            }
+        }
+        return ans;
+    }
+};
