@@ -51,3 +51,21 @@ public:
         return ans;
     }
 };
+
+
+//Solution two, more simpler
+class Solution {
+public:
+    int maxProduct(int A[], int n) {
+        int begin = 0, mmin = A[0], mmax = A[0], ans = A[0];
+        int t1, t2;
+        for(int i = 1; i<n; ++i) {
+            t1 = max(A[i], max(mmax*A[i], mmin*A[i]));
+            t2 = min(A[i], min(mmax*A[i], mmin*A[i]));
+            mmax = t1;
+            mmin = t2;
+            ans = max(ans, mmax);
+        }
+        return ans;
+    }
+};
