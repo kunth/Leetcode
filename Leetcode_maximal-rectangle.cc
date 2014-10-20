@@ -37,3 +37,67 @@ public:
         return ans;
     }
 };
+
+
+//Another trial
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char> > &matrix) {
+        if(matrix.empty())
+            return 0;
+        int row = matrix.size(), col = matrix[0].size();
+        vector<vector<int> >dp(row, vector<int>(col, 0));
+        for(int i = 0; i<row; ++i)
+            if(matrix[i][0]=='1')
+                dp[i][0] = 1;
+                
+        for(int i = 0; i<row; ++i)
+            for(int j = 1; j<col; ++j)
+                if(matrix[i][j]=='1')
+                    dp[i][j] = dp[i][j-1]+1;
+        
+        int minWidth, ans = 0;
+        for(int i = 0; i<row; ++i) {
+            for(int j = 0; j<col; ++j) {
+                minWidth = col;
+                for(int k = i; k>=0; --k) {
+                    if(!dp[k][j])
+                        break;
+                    minWidth = min(minWidth, dp[k][j]);
+                    ans = max(ans, minWidth*(i-k+1));
+                }
+            }
+        }
+        return ans;
+    }
+};
+
+//O(n^2) solution
+class Solution {
+public:
+    int maximalRectangle(vector<vector<char> > &matrix) {
+        if(matrix.empty())
+            return 0;
+        int row = matrix.size(), col = matrix[0].size(), ans = 0;
+        vector<int>dp(col, 0);
+        stack<int>st;
+        for(int i = 0; i<row; ++i) {
+            int pos;
+            for(int j = 0; j<col; ++j) {
+                dp[j] = matrix[i][j]=='1' ? dp[j] + 1 : 0;
+                while(!st.empty() && dp[j]<dp[st.top()]) {
+                    pos = st.top();
+                    st.pop();
+                    ans = max(ans, dp[pos] * (st.empty() ? j : j-1-st.top()));
+                }
+                st.push(j);
+            }
+            while(!st.empty()) {
+                pos = st.top();
+                st.pop();
+                ans = max(ans, dp[pos] * (st.empty() ? col : col-1-st.top()));
+            }
+        }
+        return ans;
+    }
+};
