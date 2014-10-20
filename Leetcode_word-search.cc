@@ -59,3 +59,51 @@ public:
         return false;
     }
 };
+
+
+//Another solution, more clean code
+class Solution {
+private:
+    int row, col;
+    int x[4] = {-1, 1, 0, 0}, y[4] = {0, 0, -1, 1};
+    bool dfs(vector<vector<char> >&board, string word, int r, int l) {
+        if(word.empty())
+            return true;
+        int nr, nl;
+        for(int k = 0; k<4; ++k) {
+            nr = r+x[k];
+            nl = l+y[k];
+            char ch;
+            if(nr>=0 && nr<row && nl>=0 && nl<col && board[nr][nl] == word[0]) {
+                ch = board[nr][nl];
+                board[nr][nl] = '*';
+                if(word.substr(1).empty())
+                    return true;
+                if(dfs(board, word.substr(1), nr, nl))
+                    return true;
+                board[nr][nl] = ch;
+            }
+        }
+        return false;
+    }
+public:
+    bool exist(vector<vector<char> > &board, string word) {
+        if(board.empty() || word.empty())
+            return false;
+        row = board.size();
+        col = board[0].size();
+        char ch;
+        for(int i = 0; i<row; ++i){
+            for(int j = 0; j<col; ++j) {
+                if(board[i][j]==word[0]){
+                    ch = board[i][j];
+                    board[i][j] = '*';
+                    if(dfs(board, word.substr(1), i, j))
+                        return true;
+                    board[i][j] = ch;
+                }
+            }
+        }
+        return false;
+    }
+};
