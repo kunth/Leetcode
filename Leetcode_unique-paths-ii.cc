@@ -73,3 +73,47 @@ public:
         return -obstacleGrid[row-1][col-1];
     }
 };
+
+
+//Third trial, worse than the second
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int> > &obstacleGrid) {
+        if(obstacleGrid.empty())
+            return 0;
+        int row = obstacleGrid.size(), col = obstacleGrid[0].size();
+        vector<vector<int> >dp(row, vector<int>(col, 1));
+        if(obstacleGrid[row-1][col-1] || obstacleGrid[0][0])
+            return 0;
+        bool flag = false;
+        for(int j = 0; j<col; ++j)
+            if(flag)
+                obstacleGrid[0][j] = 1;
+            else if(obstacleGrid[0][j])
+                flag = true;
+            
+        flag = false;
+        for(int i = 0; i<row; ++i)
+            if(flag)
+                obstacleGrid[i][0] = 1;
+            else if(obstacleGrid[i][0])
+                flag = true;
+        
+        for(int i = 1; i<row; ++i) {
+            for(int j = 1; j<col; ++j) {
+                if(obstacleGrid[i][j] || (obstacleGrid[i-1][j] && obstacleGrid[i][j-1])) {
+                    obstacleGrid[i][j] = 1;
+                    dp[i][j] = 0;
+                    continue;
+                }
+                else if(obstacleGrid[i-1][j])
+                    dp[i][j] = dp[i][j-1];
+                else if(obstacleGrid[i][j-1])
+                    dp[i][j] = dp[i-1][j];
+                else
+                    dp[i][j] = dp[i][j-1] + dp[i-1][j];
+            }
+        }
+        return dp[row-1][col-1];
+    }
+};
