@@ -35,3 +35,22 @@ public:
         return arr[n];
     }
 };
+
+//Third trial, to my surprise, this bad code is accepted
+class Solution {
+public:
+    int numTrees(int n) {
+        if(n==0 || n==1)
+            return 1;
+        else if(n==2)
+            return 2;
+        else {
+            int ans = 0;
+            for(int i = 0; i<n; ++i)
+                ans += numTrees(i) * numTrees(n-1-i);
+            return ans;
+        }
+    }
+};
+
+
