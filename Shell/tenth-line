@@ -1,0 +1,2 @@
+# 1
+sed -n 10,10p file.txt
